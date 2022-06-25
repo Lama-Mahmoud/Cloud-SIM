@@ -4,7 +4,8 @@ const router = Router();
 
 router.post('/auth/signup', signup);
 
-//router.post('/auth/login', login);
+router.post('/auth/login', login);
+
 //router.post('/auth/edit', edit);
 //router.post('/auth/remove', remove);
 

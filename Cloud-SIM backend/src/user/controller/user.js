@@ -1,5 +1,8 @@
-const {  addUser, addContact } = require('../services');
+const {  addUser, getByEmail } = require('../services');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
+
 
 async function signup(req, res) {
     console.log("I'm here");
@@ -18,6 +21,28 @@ async function signup(req, res) {
     }
   }
 
+  async function login(req, res) {
+    try {
+      const user = await getByEmail(req.body.email);
+      if (!user) return res.status(400).send('invalid credentials');
+  
+      const validPassword = await bcrypt.compare(req.body.password, user.password);
+      if (!validPassword) return res.status(400).send('invalid credentials');
+  
+      const token = jwt.sign(
+        {_id: user._id, name: user.name, email: user.email},
+        TOKEN_SECRET
+      );
+  
+      return res.header('auth-token', token).send(token);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
+  }
+
+
   module.exports={
-    signup
+    signup,
+    login
   };
