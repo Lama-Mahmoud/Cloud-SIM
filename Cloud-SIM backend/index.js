@@ -7,7 +7,7 @@ const port = 3000;
 const app = express();
 app.use(cors());
 app.use(express.json());
-const userRouter = require('./src/user');
+const userRouter = require('./src/user/index');
 
 
 const DB_CONNECT = process.env.DB_CONNECT || "";
