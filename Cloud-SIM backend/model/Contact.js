@@ -1,4 +1,4 @@
-const { Int32 } = require('mongodb');
+const { Int32, Double } = require('mongodb');
 const mongoose = require('mongoose');
 
 
@@ -26,11 +26,11 @@ const contactSchema = new mongoose.Schema({
 
     location:{
           long:{
-            type: Number,
+            type: Double,
             required:true
           },
           lat:{
-            type: Number,
+            type: Double,
             required:true
           }
 
