@@ -1,11 +1,9 @@
 const User = require('../../model/User');
-const Task = require('../../model/Contact');
+const Contact = require('../../model/Contact');
 
 
 async function addUser(body, hashPassword) {
     
-    console.log("I'm here addUser");
-
     const {
       name,
       email,
@@ -27,8 +25,25 @@ async function getByEmail(email) {
     });
   }
 
+  
+  async function newContact(body) {
+    const{
+        name,
+        phone,
+        Relation,
+        location,
+        user
+    }=body
+    const cont = new Contact({name,
+        phone,
+        Relation,
+        location,
+        user});
+    return await cont.save();
+  }
 
   module.exports={
     addUser,
-    getByEmail
+    getByEmail,
+    newContact
   };

@@ -1,5 +1,6 @@
 const { Int32, Double } = require('mongodb');
 const mongoose = require('mongoose');
+require('@mongoosejs/double'); 
 
 
 const contactSchema = new mongoose.Schema({
@@ -8,7 +9,7 @@ const contactSchema = new mongoose.Schema({
         type: String,
         required: true,
         min: 6,
-        max: 255,
+        max: 25,
       },
 
     phone:{
@@ -26,11 +27,11 @@ const contactSchema = new mongoose.Schema({
 
     location:{
           long:{
-            type: Double,
+            type: String,
             required:true
           },
           lat:{
-            type: Double,
+            type: String,
             required:true
           }
 

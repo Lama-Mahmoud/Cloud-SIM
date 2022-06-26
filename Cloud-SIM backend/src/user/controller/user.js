@@ -1,6 +1,7 @@
-const {  addUser, getByEmail } = require('../services');
+const {  addUser, getByEmail,newContact } = require('../services');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const User = require('../../../model/User');
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
 
 
@@ -41,8 +42,28 @@ async function signup(req, res) {
     }
   }
 
+  async function addContact(req,res){
+    try{
+        const addContactResult = await newContact(req.body);
+
+        console.log('addContactResult =>', addContactResult);
+        const updateUser=await User.findByIdAndUpdate(addContactResult.user,
+            {$push:{
+                contacts:addContactResult._id
+            }
+
+            });
+        return res.send({ contact: addContactResult._id });
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send(error);
+    }
+  }
+
 
   module.exports={
     signup,
-    login
+    login,
+    addContact
   };
