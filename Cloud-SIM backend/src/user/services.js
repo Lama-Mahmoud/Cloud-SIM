@@ -83,7 +83,16 @@ async function getByEmail(email) {
       return await Contact.deleteOne(filter,cont);
   }
 
+  async function getAll(query)
+  {
+    const id=query.user;
+    return await Contact.find({user:id});
+  }
+
+
+
   module.exports={
+    getAll,
     addUser,
     getByEmail,
     newContact,

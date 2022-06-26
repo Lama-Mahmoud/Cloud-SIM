@@ -12,6 +12,6 @@ router.post('/auth/edit', editContact);
 
 router.post('/auth/remove', remove);
 
-router.post('/auth/contacts', contacts);
+router.get('/auth/contacts', contacts);
 
 module.exports = router;

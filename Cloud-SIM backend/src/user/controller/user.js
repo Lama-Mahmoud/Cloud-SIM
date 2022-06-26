@@ -1,7 +1,8 @@
-const {  addUser, getByEmail,newContact,edit,removeContact } = require('../services');
+const {  addUser, getByEmail,newContact,edit,removeContact,getAll } = require('../services');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../../../model/User');
+const { get } = require('@mongoosejs/double');
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
 
 
@@ -90,11 +91,24 @@ async function signup(req, res) {
     }
   }
 
+  async function contacts(req,res){
+    try{
+      const getcontacts=await getAll(req.query);
+      console.log("contacs",getcontacts);
+      return res.send(getcontacts);
+    }
+    catch(error){
+        console.log(error)
+    }
+  }
+  
+
 
   module.exports={
     signup,
     login,
     addContact,
     editContact,
-    remove
+    remove,
+    contacts
   };
