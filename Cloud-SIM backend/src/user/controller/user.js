@@ -78,9 +78,11 @@ async function signup(req, res) {
     try{
       const removeResult= await removeContact(req.body);
       console.log('edit results=>',removeResult);
-      const updateUser=await User.updateOne(req.user,
+      const id=req._id;
+      const userid=req.user
+      const updateUser=await User.findByIdAndUpdate(userid,
         {$pull:{
-          contacts:{"_id":req._id,}
+          contacts:{id,}
         }});
         console.log(updateUser)
       return res.send({contact: removeResult});
