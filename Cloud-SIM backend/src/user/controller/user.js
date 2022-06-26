@@ -1,4 +1,4 @@
-const {  addUser, getByEmail,newContact } = require('../services');
+const {  addUser, getByEmail,newContact,edit } = require('../services');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../../../model/User');
@@ -60,10 +60,22 @@ async function signup(req, res) {
         res.status(500).send(error);
     }
   }
+  async function editContact(req,res){
+    try{
+      const editresult= await edit(req.body);
+      console.log('edit results=>',editresult);
+      return res.send({contact: editresult});
+    }
+    catch(error){
+      console.log(error);
+      res.status(500).send(error);
+    }
+  }
 
 
   module.exports={
     signup,
     login,
-    addContact
+    addContact,
+    editContact
   };

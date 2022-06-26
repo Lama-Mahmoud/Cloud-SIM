@@ -42,8 +42,31 @@ async function getByEmail(email) {
     return await cont.save();
   }
 
+  async function edit(body) {
+    const filter={_id:body._id};
+    const{
+        _id,
+        name,
+        phone,
+        Relation,
+        location,
+        user
+    }=body
+    const cont = new Contact({
+        _id,
+        name,
+        phone,
+        Relation,
+        location,
+        user});
+    return await Contact.replaceOne(filter,cont);
+  }
+
+  
+
   module.exports={
     addUser,
     getByEmail,
-    newContact
+    newContact,
+    edit
   };
