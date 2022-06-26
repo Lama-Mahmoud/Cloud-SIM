@@ -1,4 +1,4 @@
-const {  addUser, getByEmail,newContact,edit } = require('../services');
+const {  addUser, getByEmail,newContact,edit,removeContact } = require('../services');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../../../model/User');
@@ -73,9 +73,28 @@ async function signup(req, res) {
   }
 
 
+  async function remove(req,res){
+    try{
+      const removeResult= await removeContact(req.body);
+      console.log('edit results=>',removeResult);
+      const updateUser=await User.updateOne(req.user,
+        {$pull:{
+          contacts:{"_id":req._id,}
+        }});
+        console.log(updateUser)
+      return res.send({contact: removeResult});
+    }
+    catch(error){
+      console.log(error);
+      res.status(500).send(error);
+    }
+  }
+
+
   module.exports={
     signup,
     login,
     addContact,
-    editContact
+    editContact,
+    remove
   };

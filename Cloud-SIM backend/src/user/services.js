@@ -62,11 +62,31 @@ async function getByEmail(email) {
     return await Contact.replaceOne(filter,cont);
   }
 
-  
+  async function removeContact(body)
+  {
+      const filter={_id:body._id};
+      const{
+        _id,
+        name,
+        phone,
+        Relation,
+        location,
+        user
+    }=body
+    const cont = new Contact({
+        _id,
+        name,
+        phone,
+        Relation,
+        location,
+        user});
+      return await Contact.deleteOne(filter,cont);
+  }
 
   module.exports={
     addUser,
     getByEmail,
     newContact,
-    edit
+    edit,
+    removeContact
   };
