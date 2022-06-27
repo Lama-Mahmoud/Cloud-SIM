@@ -13,23 +13,24 @@ code {
 }
 input{
   border:1px solid #E7BAFC;
-  font-size: 25px;
+  font-size: 20px;
   border-radius: 8px;
   outline:none;
   background-color:#F2F1F1;
-  color: #ada8a8;
-  margin-right:1%;
+  color: #807e7e;
+  margin-left:1%;
   width: 99%;
-  padding:1%
+  padding:1%;
+  box-sizing: border-box;
 }
 
 input:hover{
   background-color: #f7f7f7;
   outline:none;
 }
-label{
-  margin-right:2%;
-  font-size: 25px;
+lable{
+  margin-left:2%;
+  font-size: 30px;
   color: #6F6969;
 }
 
